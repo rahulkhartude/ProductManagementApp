@@ -90,14 +90,14 @@ export const UpdateProduct = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const param = useParams();
-
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || ''; 
   useEffect(() => {
     getProductDetails();
   }, []);
 
   const getProductDetails = async () => {
     const token = JSON.parse(localStorage.getItem('token'));
-    let product = await fetch(`http://localhost:5000/product/${param.id}`, {
+    let product = await fetch(`${BACKEND_URL}/product/${param.id}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -118,7 +118,7 @@ export const UpdateProduct = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/product/${param.id}`, {
+      const response = await fetch(`${BACKEND_URL}/product/${param.id}`, {
         method: 'PUT',
         body: JSON.stringify({ name, price, category, company }),
         headers: {

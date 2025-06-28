@@ -67,6 +67,7 @@ export const Product = () => {
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || ''; 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,7 +91,7 @@ export const Product = () => {
 
     let userId = JSON.parse(localStorage.getItem('user'))._id;
 
-    let result = await fetch('http://localhost:5000/add-product', {
+    let result = await fetch(`${BACKEND_URL}/add-product`, {
       method: 'POST',
       body: JSON.stringify({ ...formData, userId }),
       headers: {

@@ -3,20 +3,7 @@
 
 // src/components/ProductList.js
 import React, { useEffect, useState } from 'react';
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableRow,
-//   Paper,
-//   TextField,
-//   Button,
-//   Typography,
-//   Box,
-//   IconButton,
-//   Stack
-// } from '@mui/material';
+
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Paper,
   TextField, Button, Typography, Box, IconButton, Stack, MenuItem
@@ -42,7 +29,8 @@ export const ProductList = () => {
   const [open, setOpen] = useState(false);
   const [selectedProductId,setSelectedProducuctId]  = useState("");
   
-
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || ''; 
+  // my base Url  = http://localhost:5000
   useEffect(() => {
     getProduct();
   }, []);
@@ -54,7 +42,7 @@ export const ProductList = () => {
 
   const getProduct = async () => {
     const token = JSON.parse(localStorage.getItem('token'));
-    const result = await fetch('http://localhost:5000/products', {
+    const result = await fetch(`${BACKEND_URL}/products`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -86,7 +74,7 @@ export const ProductList = () => {
   const confirmDelete = async()=>{
     console.log("selectedProductId",selectedProductId);
     try {
-      const result = await fetch(`http://localhost:5000/product/${selectedProductId}`, {
+      const result = await fetch(`${BACKEND_URL}/product/${selectedProductId}`, {
         method: 'DELETE',
         headers: {
           authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
@@ -107,7 +95,7 @@ export const ProductList = () => {
   const searchProductByKey = async (key) => {
     const token = JSON.parse(localStorage.getItem('token'));
     if (key) {
-      const result = await fetch(`http://localhost:5000/search/${key}`, {
+      const result = await fetch(`${BACKEND_URL}/search/${key}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

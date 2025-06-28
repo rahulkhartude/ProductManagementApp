@@ -68,6 +68,7 @@ export const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || ''; 
   
 const navigate = useNavigate();
 
@@ -113,7 +114,7 @@ const navigate = useNavigate();
     const { name, email, password } = formData;
     if (validate()) {
       //start
-      let result = await fetch('http://localhost:5000/register',
+      let result = await fetch(`${BACKEND_URL}/register`,
         {
             method:'post',
             body :JSON.stringify({name,email,password}),

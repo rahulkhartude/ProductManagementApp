@@ -65,6 +65,8 @@ export const Login = () => {
   const [errors, setErrors] = useState({});
   const [loginError , setLoginError] = useState("");
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || ''; 
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -104,7 +106,8 @@ export const Login = () => {
 
     if (validate()) {
       try {
-        let resp = await fetch('http://localhost:5000/login', {
+        
+        let resp = await fetch(`${BACKEND_URL}/login`, {
           method: 'POST',
           body: JSON.stringify({ email, password }),
           headers: {

@@ -30,8 +30,8 @@ app.options('*', cors({
 
 // Register route
 app.post("/register", async (req, resp) => {
+   console.log("In register");
     const { name, email, password } = req.body;
-    console.log("In reg", name, email, password);
 
     if (name && email && password) {
         let user = new User(req.body);

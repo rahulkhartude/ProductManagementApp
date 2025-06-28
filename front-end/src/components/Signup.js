@@ -116,7 +116,9 @@ const navigate = useNavigate();
     if (validate()) {
       //start
       console.log("validate called")
-      let result = await fetch(`${BACKEND_URL}register`,
+      // let result = await fetch(`${BACKEND_URL}register`,
+       
+        let result = await fetch(`https://productmanagementapp-xqhc.onrender.com/register`,
         {
             method:'post',
             body :JSON.stringify({name,email,password}),

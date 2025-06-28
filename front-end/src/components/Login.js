@@ -107,7 +107,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
     if (validate()) {
       try {
         
-        let resp = await fetch(`${BACKEND_URL}/login`, {
+        let resp = await fetch(`${BACKEND_URL}login`, {
           method: 'POST',
           body: JSON.stringify({ email, password }),
           headers: {

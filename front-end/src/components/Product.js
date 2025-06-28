@@ -91,7 +91,7 @@ export const Product = () => {
 
     let userId = JSON.parse(localStorage.getItem('user'))._id;
 
-    let result = await fetch(`${BACKEND_URL}/add-product`, {
+    let _result = await fetch(`${BACKEND_URL}/add-product`, {
       method: 'POST',
       body: JSON.stringify({ ...formData, userId }),
       headers: {
@@ -100,7 +100,7 @@ export const Product = () => {
       }
     });
 
-    result = await result.json();
+    // result = await result.json();
     navigate('/');
   };
 

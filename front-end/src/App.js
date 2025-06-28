@@ -107,7 +107,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import { Footer } from './components/Footer'; // Ensure this import exists
 import { Signup } from './components/Signup';
-import { PrivateComponent } from './components/PrivtaeComponent';
+// import { PrivateComponent } from './components/PrivtaeComponent';
+import { PrivtaeComponent } from './components/PrivtaeComponent';
 import { Login } from './components/Login';
 import { Product } from './components/Product'; // Assuming you have this component
 
@@ -121,7 +122,7 @@ function App() {
         <Nav /> {/* Your navigation bar */}
         <Routes>
           {/* Protected Routes */}
-          <Route element={<PrivateComponent />}>
+          <Route element={<PrivtaeComponent />}>
             <Route path="/" element={<ProductList />} />
             {/* <Route path="/add" element={<AddProduct />} /> Assuming AddProduct exists */}
             <Route path="/add" element={<Product />} />

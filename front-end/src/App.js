@@ -109,7 +109,8 @@ import { Footer } from './components/Footer'; // Ensure this import exists
 import { Signup } from './components/Signup';
 import { PrivateComponent } from './components/PrivtaeComponent';
 import { Login } from './components/Login';
-import { AddProduct } from './components/AddProduct'; // Assuming you have this component
+import { Product } from './components/Product'; // Assuming you have this component
+
 import { ProductList } from './components/ProductList';
 import { UpdateProduct } from './components/UpdateProduct';
 
@@ -122,7 +123,8 @@ function App() {
           {/* Protected Routes */}
           <Route element={<PrivateComponent />}>
             <Route path="/" element={<ProductList />} />
-            <Route path="/add" element={<AddProduct />} /> {/* Assuming AddProduct exists */}
+            {/* <Route path="/add" element={<AddProduct />} /> Assuming AddProduct exists */}
+            <Route path="/add" element={<Product />} />
             <Route path="/update/:id" element={<UpdateProduct />} />
             <Route path="/logout" element={<h1>Logout Component</h1>} /> {/* Or handle logout directly in Nav */}
             <Route path="/profile" element={<h1>Profile Component</h1>} />

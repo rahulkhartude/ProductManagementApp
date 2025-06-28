@@ -110,10 +110,12 @@ const navigate = useNavigate();
   };
 
   const handleSubmit = async(e) => {
+    console.log("data sign up called")
     e.preventDefault();
     const { name, email, password } = formData;
     if (validate()) {
       //start
+      console.log("validate called")
       let result = await fetch(`${BACKEND_URL}register`,
         {
             method:'post',
@@ -124,6 +126,7 @@ const navigate = useNavigate();
         }
     );
     result = await result.json();
+    console.log("api called",result);
 
     if(result.auth){
     localStorage.setItem("user",JSON.stringify(result.result));

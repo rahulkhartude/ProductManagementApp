@@ -292,24 +292,44 @@ export const ProductList = () => {
         setOpen(true);
     };
 
-    const confirmDelete = async () => {
-        console.log("selectedProductId", selectedProductId);
-        try {
-            const result = await fetch(`${BACKEND_URL}/product/${selectedProductId}`, {
-                method: 'DELETE',
-                headers: {
-                    authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-                },
-            });
-            const data = await result.json();
-            if (data) {
-                getProduct(); // Refresh list after deletion
-            }
-        } catch (error) {
-            console.error('Error deleting product:', error);
+    // const confirmDelete = async () => {
+    //     console.log("selectedProductId", selectedProductId);
+    //     try {
+    //         const result = await fetch(`${BACKEND_URL}/product/${selectedProductId}`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
+    //             },
+    //         });
+    //         const data = await result.json();
+    //         if (data) {
+    //             getProduct(); // Refresh list after deletion
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting product:', error);
+    //     }
+    //     setOpen(false);
+    // }
+
+
+const confirmDelete = async () => {
+    console.log("selectedProductId", selectedProductId);
+    try {
+        const result = await fetch(`${BACKEND_URL}/product/${selectedProductId}`, { // THIS 'result'
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
+            },
+        });
+        const data = await result.json(); // This 'result' is used here! So, it might be another 'result'
+        if (data) {
+            getProduct(); // Refresh list after deletion
         }
-        setOpen(false);
+    } catch (error) {
+        console.error('Error deleting product:', error);
     }
+    setOpen(false);
+}
 
     const searchProductByKey = async (key) => {
         const token = JSON.parse(localStorage.getItem('token'));

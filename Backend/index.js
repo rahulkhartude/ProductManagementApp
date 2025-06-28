@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const cors = require('cors');
 require('./db/config')
@@ -127,9 +128,19 @@ app.get('/search/:key',verifyToken, async (req, res) => {
        res.status(500).json({ error: "Something went wrong" });
    }
 }
-else{
-   let result = await fetch('http://localhost:5000/products')
-   res.send(result);
+// else{
+//    let result = await fetch('http://localhost:5000/products')
+//    res.send(result);
+// }
+else {
+    // If no search key, fetch all products directly from DB (not localhost fetch)
+    try {
+        let products = await Product.find();
+        res.status(200).send(products);
+    } catch (error) {
+        console.error("Get all products for empty search error:", error);
+        res.status(500).send({ result: "Failed to retrieve all products for search" });
+    }
 }
 });
 
@@ -152,6 +163,11 @@ function verifyToken(req,resp,next){
  }
 }
 
-app.listen(5000)
+// app.listen(5000)
+
+const port = process.env.PORT || 5000; // Use port from environment variable or fallback to 5000
+app.listen(port, () => {
+    console.log(`Backend Server is running on port ${port}`);
+});
 
  

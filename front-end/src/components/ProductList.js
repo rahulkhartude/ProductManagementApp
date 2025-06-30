@@ -246,6 +246,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
 export const ProductList = () => {
+    console.log("Product list called");
     const [products, setProducts] = useState([]);
     const [searchProduct, setSearchProduct] = useState("");
     const [sortField, setSortField] = useState("");

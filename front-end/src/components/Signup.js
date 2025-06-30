@@ -135,7 +135,8 @@ let result = fetch('https://productmanagementapp-xqhc.onrender.com/register', {
   credentials: 'include'
 });
 
-    
+    console.log("result",result);
+
 
     if(result.auth){
     localStorage.setItem("user",JSON.stringify(result.result));

@@ -142,7 +142,9 @@ let result = fetch('https://productmanagementapp-xqhc.onrender.com/register', {
     localStorage.setItem("user",JSON.stringify(result.result));
     localStorage.setItem("token",JSON.stringify(result.auth));
     if(result){
+      console.log("navigate to product list start");
         navigate('/')
+              console.log("navigate to product list end");
     }
       //end
 

@@ -224,7 +224,7 @@ export const UpdateProduct = () => {
     // It depends on param.id (from useParams) and BACKEND_URL.
     const getProductDetails = useCallback(async () => {
         const token = JSON.parse(localStorage.getItem('token'));
-        let url = `${BACKEND_URL}/product/${param.id}`; // Construct URL with id
+        let url = `${BACKEND_URL}product/${param.id}`; // Construct URL with id
 
         try {
             let response = await fetch(url, {
@@ -266,7 +266,7 @@ export const UpdateProduct = () => {
         }
 
         try {
-            const response = await fetch(`${BACKEND_URL}/product/${param.id}`, {
+            const response = await fetch(`${BACKEND_URL}product/${param.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ name, price, category, company }),
                 headers: {

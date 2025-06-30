@@ -131,13 +131,11 @@ const navigate = useNavigate();
 fetch('https://productmanagementapp-xqhc.onrender.com/register', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data),
+  body: JSON.stringify({name,email,password}),
   credentials: 'include'
 });
 
     
-    result = await result.json();
-    console.log("api called",result);
 
     if(result.auth){
     localStorage.setItem("user",JSON.stringify(result.result));

@@ -118,15 +118,24 @@ const navigate = useNavigate();
       console.log("validate called")
       // let result = await fetch(`${BACKEND_URL}register`,
        
-        let result = await fetch(`https://productmanagementapp-xqhc.onrender.com/register`,
-        {
-            method:'post',
-            body :JSON.stringify({name,email,password}),
-            headers :{
-                'Content-Type' : 'application/json'
-            },
-        }
-    );
+        // let result = await fetch(`https://productmanagementapp-xqhc.onrender.com/register`,
+        // {
+        //     method:'post',
+        //     body :JSON.stringify({name,email,password}),
+        //     headers :{
+        //         'Content-Type' : 'application/json'
+        //     },
+        // }
+            // headers :{
+       // fetch
+fetch('https://productmanagementapp-xqhc.onrender.com/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data),
+  credentials: 'include'
+});
+
+    
     result = await result.json();
     console.log("api called",result);
 

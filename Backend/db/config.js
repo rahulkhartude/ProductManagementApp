@@ -41,10 +41,22 @@
 // // module.exports = mongoose;
 
 
-const mongoose = require('mongoose');
-require('dotenv').config();
+// const mongoose = require('mongoose');
+// require('dotenv').config();
 
-// mongoose.connect(process.env.MONGO_URI)
-mongoose.connect("mongodb+srv://rahulkhartude:Rahul%40123@cluster0.juwyq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+// // mongoose.connect(process.env.MONGO_URI)
+// mongoose.connect("mongodb+srv://rahulkhartude:Rahul%40123@cluster0.juwyq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+// .then(() => console.log('MongoDB connected'))
+// .catch(err => console.error('MongoDB connection error:', err));
+
+require('dotenv').config();
+const mongoose = require('mongoose');
+
+if (!process.env.MONGO_URI) {
+  console.error('MONGO_URI is not defined in .env file');
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));

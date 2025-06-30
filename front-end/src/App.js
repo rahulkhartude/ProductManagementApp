@@ -136,7 +136,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<h1>404 Page Not Found</h1>} /> {/* Catch-all for undefined routes */}
         </Routes>
-        <Footer /> {/* Render the Footer component here */}
+        {/* <Footer /> Render the Footer component here */}
       </BrowserRouter>
     </div>
   );

@@ -260,7 +260,7 @@ export const ProductList = () => {
     const getProduct = useCallback(async () => {
         const token = JSON.parse(localStorage.getItem('token'));
         try {
-            const response = await fetch(`${BACKEND_URL}/products`, {
+            const response = await fetch(`${BACKEND_URL}products`, {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },
@@ -318,7 +318,7 @@ export const ProductList = () => {
 const confirmDelete = async () => {
     console.log("selectedProductId", selectedProductId);
     try {
-        const result = await fetch(`${BACKEND_URL}/product/${selectedProductId}`, { // THIS 'result'
+        const result = await fetch(`${BACKEND_URL}product/${selectedProductId}`, { // THIS 'result'
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
@@ -338,7 +338,7 @@ const confirmDelete = async () => {
         const token = JSON.parse(localStorage.getItem('token'));
         if (key) {
             try {
-                const response = await fetch(`${BACKEND_URL}/search/${key}`, {
+                const response = await fetch(`${BACKEND_URL}search/${key}`, {
                     headers: {
                         authorization: `Bearer ${token}`,
                     },

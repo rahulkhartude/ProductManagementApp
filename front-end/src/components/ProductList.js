@@ -280,6 +280,8 @@ export const ProductList = () => {
         }
     }, [BACKEND_URL]); // Dependency: BACKEND_URL
 
+    console.log("getProduct",getProduct);
+
     // Use useEffect to call getProduct, with getProduct as a dependency.
     // Because getProduct is memoized by useCallback, this useEffect will only run
     // when BACKEND_URL changes, or once on mount if BACKEND_URL is constant.

@@ -23,8 +23,8 @@
 //             <Route path="/update/:id" element={<UpdateProduct/>} />
 //             <Route path="/profile" element={<h1>Profile</h1>} />
 //             </Route>
-            
-//             <Route path="/logout" element={<h1>Logout</h1>} /> 
+
+//             <Route path="/logout" element={<h1>Logout</h1>} />
 //             <Route path='/signup' element={<Signup/>}></Route>
 //            <Route path='/login' element={<Login></Login>}></Route>
 //            </Routes>
@@ -96,7 +96,7 @@
 // export default App;
 
 
-//deploymentcode 
+//deploymentcode
 // src/App.js
 
 import React from 'react';
@@ -105,7 +105,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Import your components
 import Nav from './components/Nav';
-import { Footer } from './components/Footer'; // Ensure this import exists
+// import { Footer } from './components/Footer'; // Ensure this import exists
 import { Signup } from './components/Signup';
 // import { PrivateComponent } from './components/PrivtaeComponent';
 import { PrivtaeComponent } from './components/PrivtaeComponent';
@@ -136,7 +136,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<h1>404 Page Not Found</h1>} /> {/* Catch-all for undefined routes */}
         </Routes>
-        <Footer /> Render the Footer component here
+        {/* <Footer /> Render the Footer component here */}
       </BrowserRouter>
     </div>
   );

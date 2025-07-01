@@ -168,7 +168,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const mongoose = require('mongoose');
 const Jwt = require('jsonwebtoken');
 
@@ -179,11 +179,21 @@ const Product = require('./db/Product');
 const app = express();
 
 // ✅ Configure CORS
-const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
+// const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
+// app.use(cors({
+//     origin: allowedOrigin,
+//     credentials: true
+// }));
+
+const cors = require('cors');
+
 app.use(cors({
-    origin: allowedOrigin,
-    credentials: true
+  origin: 'https://guileless-beijinho-4b808b.netlify.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 // ✅ Parse incoming JSON
 app.use(express.json());

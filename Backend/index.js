@@ -199,6 +199,7 @@ const jwtKey = 'e-comm';
 
 // Register route
 app.post("/register", async (req, resp) => {
+    cconsole.log('Received signup request');
     const { name, email, password } = req.body;
 
     if (name && email && password) {

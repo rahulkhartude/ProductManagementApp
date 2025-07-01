@@ -128,7 +128,7 @@ const navigate = useNavigate();
         // }
             // headers :{
        // fetch
-let response = fetch('https://productmanagementapp-xqhc.onrender.com/register', {
+let response = await fetch('https://productmanagementapp-xqhc.onrender.com/register', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({name,email,password}),

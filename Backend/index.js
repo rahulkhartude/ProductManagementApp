@@ -17,7 +17,8 @@ const app = express();
 // const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
 const allowedOrigin = [
   'http://localhost:3000',
-  'https://guileless-beijinho-4b808b.netlify.app'
+  'https://guileless-beijinho-4b808b.netlify.app',
+  'https://ecommerce-admin-panel-by-rahul.netlify.app/'
 ];
 app.use(cors({
     origin: allowedOrigin,

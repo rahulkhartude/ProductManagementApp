@@ -125,26 +125,41 @@ const confirmDelete = async () => {
         }
     };
 
-    const handleSort = (value) => {
-    if (value) {
-        console.log("sort",value);
-        setSortField(value);
-        const sortedProducts = [...products].sort((a, b) => {
-            console.log(a)
-            if (typeof a[value] == 'number' && typeof b[value] == 'number') {
-                if("in number",a[value] == value)
-                return a[value] - b[value];
-            } else if (a[value] && b[value]) {
-                 if("in string",a[value] == value)
-                return String(a[value]).localeCompare(String(b[value]), undefined, { sensitivity: 'base' });
-            }
-            return 0;
-        });
+//     const handleSort = (value) => {
+//     if (value) {
+//         console.log("sort",value);
+//         setSortField(value);
+//         const sortedProducts = [...products].sort((a, b) => {
+//             console.log(a)
+//             if (typeof a[value] == 'number' && typeof b[value] == 'number') {
+//                 if("in number",a[value] == value)
+//                 return a[value] - b[value];
+//             } else if (a[value] && b[value]) {
+//                  if("in string",a[value] == value)
+//                 return String(a[value]).localeCompare(String(b[value]), undefined, { sensitivity: 'base' });
+//             }
+//             return 0;
+//         });
 
-        setProducts(sortedProducts);
-    }
+//         setProducts(sortedProducts);
+//     }
+// };
+
+const handleSort = (value) => {
+  if (value) {
+    console.log("sort", value);
+    setSortField(value);
+    const sortedProducts = [...products].sort((a, b) => {
+      if (typeof a[value] === 'number' && typeof b[value] === 'number') {
+        return a[value] - b[value];
+      } else if (a[value] && b[value]) {
+        return String(a[value]).localeCompare(String(b[value]), undefined, { sensitivity: 'base' });
+      }
+      return 0;
+    });
+    setProducts(sortedProducts);
+  }
 };
-
 
     const handleCancel = () => {
         setOpen(false);

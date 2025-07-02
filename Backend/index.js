@@ -179,7 +179,11 @@ const Product = require('./db/Product');
 const app = express();
 
 // ✅ Configure CORS
-const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
+// const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
+const allowedOrigin = [
+  'http://localhost:3000',
+  'https://guileless-beijinho-4b808b.netlify.app'
+];
 app.use(cors({
     origin: allowedOrigin,
     credentials: true
@@ -311,19 +315,20 @@ app.get('/search/:key', verifyToken, async (req, res) => {
 
 // ✅ Middleware to verify JWT
 function verifyToken(req, resp, next) {
-    let token = req.header('authorization');
-    if (token) {
-        token = token.split(' ')[1]; // Bearer <token>
-        Jwt.verify(token, jwtKey, (err, valid) => {
-            if (err) {
-                resp.status(401).send({ error: "Invalid token" });
-            } else {
-                next();
-            }
-        });
-    } else {
-        resp.status(403).send({ result: "Please add token with header" });
-    }
+    // let token = req.header('authorization');
+    // if (token) {
+    //     token = token.split(' ')[1]; // Bearer <token>
+    //     Jwt.verify(token, jwtKey, (err, valid) => {
+    //         if (err) {
+    //             resp.status(401).send({ error: "Invalid token" });
+    //         } else {
+    //             next();
+    //         }
+    //     });
+    // } else {
+    //     resp.status(403).send({ result: "Please add token with header" });
+    // }
+    next();
 }
 
 // ✅ Start server

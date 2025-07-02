@@ -1,51 +1,3 @@
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-// export const Product = () => {
-//     const [name,setName] = useState("")
-//     const [price,setPrice] = useState("")
-//     const [category,setCategory] = useState("")
-//     const [company,setCompany] = useState("")
-//     const [error,setError] = useState(false)
-//     const navigate = new useNavigate();
-
-//     const addProduct = async()=>{
-
-//        if(!name || !price || !category || !company){
-//         setError(true)
-//         return false;
-//        }
-//         let userId = JSON.parse(localStorage.getItem("user"))._id;
-
-//         let result = await fetch('http://localhost:5000/add-product', {
-//             method :'post',
-//             body : JSON.stringify({name,price,category,company,userId}),
-//             headers : {
-//                 'content-Type': "application/json",
-//                 'Authorization' : `Bearer ${JSON.parse(localStorage.getItem("token"))}`
-//             }
-//         })
-//         result = await result.json();
-//         navigate('/')
-        
-
-//     }
-//   return (
-//     <div className='register'>
-//         <h3>Add Product</h3>
-//         <input className='inputBox' type='text' placeholder='enter name' value={name} onChange ={(e)=>setName(e.target.value)}/>
-//         {error && !name && <span className="invalidProduct">Enter Valid Name</span> }
-//         <input className='inputBox' type='text' placeholder='enter price' value={price} onChange ={(e)=>setPrice(e.target.value)}/>
-//         {error && !price && <span className="invalidProduct">Enter Valid Price</span>}
-//         <input className='inputBox' type='text' placeholder='enter category' value={category} onChange ={(e)=>setCategory(e.target.value)} />
-//         {error && !category && <span className="invalidProduct">Enter Valid Category</span>}
-//         <input className='inputBox' type='text' placeholder='enter company' value={company} onChange ={(e)=>setCompany(e.target.value)} />
-//         {error && !company &&<span className="invalidProduct">Enter Valid Company</span>}
-//         <button className='appButton' type='button' onClick={addProduct}>Add Product</button>
-//     </div>
-//   )
-// }
-
 
 import React, { useState } from 'react';
 import {
@@ -78,9 +30,19 @@ export const Product = () => {
   const validate = () => {
     let temp = {};
     temp.name = formData.name ? '' : 'Name is required';
-    temp.price = formData.price ? '' : 'Price is required';
+    // temp.price = formData.price ? '' : 'Price is required';
+    if (!formData.price) {
+    temp.price = 'Price is required';
+  } else if (isNaN(formData.price)) {
+    temp.price = 'Price must be a number';
+  } else if (Number(formData.price) <= 0) {
+    temp.price = 'Price must be greater than 0';
+  } else {
+    temp.price = '';
+  }
     temp.category = formData.category ? '' : 'Category is required';
     temp.company = formData.company ? '' : 'Company is required';
+
 
     setErrors(temp);
     return Object.values(temp).every((x) => x === '');

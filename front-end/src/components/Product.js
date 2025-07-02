@@ -50,7 +50,6 @@ export const Product = () => {
 
   const addProduct = async () => {
     if (!validate()) return;
-
     let userId = JSON.parse(localStorage.getItem('user'))._id;
 
      let result = await fetch(`${BACKEND_URL}add-product`, {

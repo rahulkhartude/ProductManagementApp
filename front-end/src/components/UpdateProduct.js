@@ -327,6 +327,9 @@ export const UpdateProduct = () => {
           <Button variant="contained" color="primary" onClick={updateProduct}>
             Update
           </Button>
+          <Button variant="outlined" onClick={() => navigate(-1)}>
+                     Back
+          </Button>
         </Stack>
       </Paper>
     </Box>

@@ -18,6 +18,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
+import Pagination from '@mui/material/Pagination';
+
 export const ProductList = () => {
     console.log("Product list called");
     const [products, setProducts] = useState([]);
@@ -28,8 +30,25 @@ export const ProductList = () => {
 
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
-    // Memoize the getProduct function using useCallback
-    // It depends on BACKEND_URL because it's used inside the fetch call.
+  const totalRecords = products.length;
+  const recordsPerPage = 5;
+  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  // Calculate start and end record numbers
+  const startRecord = (page - 1) * recordsPerPage + 1;
+  const endRecord = Math.min(page * recordsPerPage, totalRecords);
+
+  // Get only the products for the current page
+  const paginatedProducts = products.slice(startRecord - 1, endRecord);
+  let indexRecord = recordsPerPage * (page -1) +1
+  
+  // Memoize the getProduct function using useCallback
     const getProduct = useCallback(async () => {
         const token = JSON.parse(localStorage.getItem('token'));
         try {
@@ -173,10 +192,11 @@ const confirmDelete = async () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products.length > 0 ? (
-                            products.map((item, index) => (
+                        {paginatedProducts.length > 0 ?
+                         (
+                            paginatedProducts.map((item, index) => (
                                 <TableRow key={item._id || index}>
-                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>{index +indexRecord}</TableCell>
                                     <TableCell>{item.name}</TableCell>
                                     <TableCell>{item.category}</TableCell>
                                     <TableCell>{item.price}</TableCell>
@@ -224,6 +244,10 @@ const confirmDelete = async () => {
                         </Dialog>
                     </TableBody>
                 </Table>
+                <Stack spacing={1}>
+              {/* <Pagination count={10} size="large" /> */}
+               <Pagination count={totalPages} page={page} onChange={handleChange} size="large" />
+             </Stack>
             </Paper>
         </Box>
     );

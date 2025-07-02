@@ -15,10 +15,14 @@ const app = express();
 
 // ✅ Configure CORS
 // const allowedOrigin = 'https://guileless-beijinho-4b808b.netlify.app';
-const allowedOrigin = [
-  'http://localhost:3000',
-  'https://ecommerce-admin-panel-by-rahul.netlify.app/'
-];
+// const allowedOrigin = [
+//   'http://localhost:3000',
+//   'https://ecommerce-admin-panel-by-rahul.netlify.app/'
+// ];
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://ecommerce-admin-panel-by-rahul.netlify.app']
+  : ['http://localhost:3000'];
+
 app.use(cors({
   origin: allowedOrigin,
   credentials: true,

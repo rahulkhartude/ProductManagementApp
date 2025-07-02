@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const mongoose = require('mongoose');
 const Jwt = require('jsonwebtoken');
 
@@ -21,9 +21,12 @@ const allowedOrigin = [
   'https://ecommerce-admin-panel-by-rahul.netlify.app/'
 ];
 app.use(cors({
-    origin: allowedOrigin,
-    credentials: true
+  origin: 'https://guileless-beijinho-4b808b.netlify.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 // ✅ Parse incoming JSON
 app.use(express.json());
@@ -39,6 +42,7 @@ const jwtKey = 'e-comm';
 
 // Register route
 app.post("/register", async (req, resp) => {
+    console.log('Received signup request');
     const { name, email, password } = req.body;
 
     if (name && email && password) {

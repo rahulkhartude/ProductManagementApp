@@ -74,7 +74,7 @@ const Nav = () => {
   const navLinks = isAuth
     ? [
         { label: 'Products', path: '/' },
-        { label: 'Add Products', path: '/add' },
+        // { label: 'Add Products', path: '/add' },
         { label: 'Profile', path: '/profile' },
         { label: `Logout (${userName})`, action: logout },
       ]

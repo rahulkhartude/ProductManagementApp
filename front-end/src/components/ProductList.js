@@ -17,7 +17,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
-
+import {useNavigate } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination';
 
 export const ProductList = () => {
@@ -48,6 +48,8 @@ export const ProductList = () => {
   const paginatedProducts = products.slice(startRecord - 1, endRecord);
   let indexRecord = recordsPerPage * (page -1) +1
   
+  const navigate = useNavigate();
+
   // Memoize the getProduct function using useCallback
     const getProduct = useCallback(async () => {
         const token = JSON.parse(localStorage.getItem('token'));
@@ -125,30 +127,11 @@ const confirmDelete = async () => {
         }
     };
 
-//     const handleSort = (value) => {
-//     if (value) {
-//         console.log("sort",value);
-//         setSortField(value);
-//         const sortedProducts = [...products].sort((a, b) => {
-//             console.log(a)
-//             if (typeof a[value] == 'number' && typeof b[value] == 'number') {
-//                 if("in number",a[value] == value)
-//                 return a[value] - b[value];
-//             } else if (a[value] && b[value]) {
-//                  if("in string",a[value] == value)
-//                 return String(a[value]).localeCompare(String(b[value]), undefined, { sensitivity: 'base' });
-//             }
-//             return 0;
-//         });
-
-//         setProducts(sortedProducts);
-//     }
-// };
 
 const handleSort = (value) => {
+    setSortField(value);
   if (value) {
     console.log("sort", value);
-    setSortField(value);
     const sortedProducts = [...products].sort((a, b) => {
       if (typeof a[value] === 'number' && typeof b[value] === 'number') {
         return a[value] - b[value];
@@ -158,6 +141,10 @@ const handleSort = (value) => {
       return 0;
     });
     setProducts(sortedProducts);
+  }
+   else {
+
+    getProduct();
   }
 };
 
@@ -170,7 +157,7 @@ const handleSort = (value) => {
             <Typography variant="h4" gutterBottom>
                 Product List
             </Typography>
-
+            {/* <Stack spacing={2} direction="row" sx={{mb:2}}>
             <TextField
                 label="Search Product..."
                 variant="outlined"
@@ -189,11 +176,50 @@ const handleSort = (value) => {
                 onChange={(e) => handleSort(e.target.value)}
                 sx={{ width: 150 }}
             >
-                <MenuItem value="">None</MenuItem>
+                <MenuItem value="None">None</MenuItem>
                 <MenuItem value="name">Name</MenuItem>
                 <MenuItem value="category">Category</MenuItem>
                 <MenuItem value="price">Price</MenuItem>
             </TextField>
+      
+            <Button variant="contained">Add Product</Button>
+            </Stack> */}
+
+            <Stack
+  spacing={2}
+  direction="row"
+  justifyContent="space-between"
+  alignItems="center"
+  sx={{ mb: 2 }}
+>
+  <Box sx={{ display: 'flex', gap: 2 }}>
+    <TextField
+      label="Search Product..."
+      variant="outlined"
+      value={searchProduct}
+      onChange={(e) => {
+        setSearchProduct(e.target.value);
+        searchProductByKey(e.target.value);
+      }}
+      sx={{ width: '300px' }}
+    />
+    <TextField
+      select
+      label="Sort By"
+      value={sortField}
+      onChange={(e) => handleSort(e.target.value)}
+      sx={{ width: 150 }}
+    >
+      <MenuItem value="">None</MenuItem>
+      <MenuItem value="name">Name</MenuItem>
+      <MenuItem value="category">Category</MenuItem>
+      <MenuItem value="price">Price</MenuItem>
+    </TextField>
+  </Box>
+
+  <Button variant="contained" onClick={()=>navigate('/add')}>Add Product</Button>
+</Stack>
+
 
             <Paper elevation={3}>
                 <Table>
